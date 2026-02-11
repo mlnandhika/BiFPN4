@@ -9,6 +9,7 @@ from pathlib import Path
 
 import torch
 import torch.nn as nn
+from ultralytics.nn.modules.bifpn import BiFPN_Add2, BiFPN_Add3
 
 from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
@@ -1706,6 +1707,14 @@ def parse_model(d, ch, verbose=True):
             c2 = args[0]
             c1 = ch[f]
             args = [*args[1:]]
+        elif m in {BiFPN_Add2, BiFPN_Add3}:
+            c2 = args[0]
+            # 1. Ambil channel dari banyak input (f is list)
+            c1 = [ch[x] for x in f]
+            # 2. Hitung output channel berdasarkan scale model (n/s/m/l)
+            #    Ini penting agar argumen '256' di YAML berubah jadi '64' di Nano.
+            c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1, c2, *args[1:]]
         else:
             c2 = ch[f]
 

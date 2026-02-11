@@ -16,6 +16,7 @@ Examples:
     >>> torch.onnx.export(m, x, f)
     >>> subprocess.run(f"onnxslim {f} {f} && open {f}", shell=True, check=True)  # pip install onnxslim
 """
+from .bifpn import BiFPN_Add2, BiFPN_Add3
 
 from .block import (
     C1,
@@ -187,4 +188,6 @@ __all__ = (
     "YOLOESegment",
     "YOLOESegment26",
     "v10Detect",
+    "BiFPN_Add2",
+    "BiFPN_Add3",
 )
