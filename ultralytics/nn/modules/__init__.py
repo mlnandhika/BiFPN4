@@ -16,9 +16,8 @@ Examples:
     >>> torch.onnx.export(m, x, f)
     >>> subprocess.run(f"onnxslim {f} {f} && open {f}", shell=True, check=True)  # pip install onnxslim
 """
-from .bifpn import BiFPN_Add2, BiFPN_Add3
-from .coordatt import CoordAtt
 
+from .bifpn import BiFPN_Add2, BiFPN_Add3
 from .block import (
     C1,
     C2,
@@ -78,6 +77,7 @@ from .conv import (
     RepConv,
     SpatialAttention,
 )
+from .coordatt import CoordAtt
 from .head import (
     OBB,
     OBB26,
@@ -131,6 +131,8 @@ __all__ = (
     "ADown",
     "Attention",
     "BNContrastiveHead",
+    "BiFPN_Add2",
+    "BiFPN_Add3",
     "Bottleneck",
     "BottleneckCSP",
     "C2f",
@@ -149,6 +151,7 @@ __all__ = (
     "Conv",
     "Conv2",
     "ConvTranspose",
+    "CoordAtt",
     "DWConv",
     "DWConvTranspose2d",
     "DeformableTransformerDecoder",
@@ -189,7 +192,4 @@ __all__ = (
     "YOLOESegment",
     "YOLOESegment26",
     "v10Detect",
-    "BiFPN_Add2",
-    "BiFPN_Add3",
-    "CoordAtt",
 )
