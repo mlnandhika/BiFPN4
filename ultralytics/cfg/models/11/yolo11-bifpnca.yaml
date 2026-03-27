@@ -34,16 +34,16 @@ backbone:
 
 # BiFPN Head (Updated Indices: 5, 8, 13)
 head:
-  # Top-Down 
+  # Top-Down
   - [13, 1, nn.Upsample, [None, 2, "nearest"]] # 14
   # Fuse P5_up(14) + P4_backbone(8)
   - [[-1, 8], 1, BiFPN_Add2, [256]] # 15
-  - [-1, 3, C3k2, [256, False]]     # 16 (Saya naikkan depth repeat jadi 3 untuk nambah akurasi)
+  - [-1, 3, C3k2, [256, False]] # 16 (Saya naikkan depth repeat jadi 3 untuk nambah akurasi)
 
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 17
   # Fuse P4_up(17) + P3_backbone(5)
   - [[-1, 5], 1, BiFPN_Add2, [256]] # 18
-  - [-1, 3, C3k2, [256, False]]     # 19 -> P3_Out
+  - [-1, 3, C3k2, [256, False]] # 19 -> P3_Out
 
   # Bottom-Up
   - [-1, 1, Conv, [256, 3, 2]] # 20
